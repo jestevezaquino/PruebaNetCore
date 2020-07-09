@@ -39,19 +39,19 @@ namespace JESUS_ESTEVEZ.Controllers
         public async Task<IActionResult> Index(Usuario user)
         {
 
+            var results = await DBServices.GetDepartments();
+
+            List<SelectListItem> Departamentos = new List<SelectListItem>();
+            foreach (var depart in results)
+            {
+                Departamentos.Add(new SelectListItem { Value = $"{depart.Codigo}", Text = depart.Nombre });
+            }
+            ViewBag.Departamentos = Departamentos;
+
             if (ModelState.IsValid)
             {
                 DBServices.AddUser(user);
                 ModelState.Clear();
-
-                var results = await DBServices.GetDepartments();
-
-                List<SelectListItem> Departamentos = new List<SelectListItem>();
-                foreach (var depart in results)
-                {
-                    Departamentos.Add(new SelectListItem { Value = $"{depart.Codigo}", Text = depart.Nombre });
-                }
-                ViewBag.Departamentos = Departamentos;
 
                 ViewBag.Message = "Usuario registrado correctamente.";
                 return View();
