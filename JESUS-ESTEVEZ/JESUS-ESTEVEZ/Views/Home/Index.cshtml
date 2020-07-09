@@ -1,0 +1,47 @@
+﻿@model JESUS_ESTEVEZ.Models.Usuario;
+@using JESUS_ESTEVEZ.Models;
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="form-container">
+            <h2>Agregar usuarios</h2>
+            <form asp-controller="Home" asp-action="Index" method="post">
+                <div class="form-group">
+                    <label asp-for="Nombre">Nombre</label>
+                    <input class="form-control" type="text" asp-for="Nombre">
+                </div>
+                <div class="form-group">
+                    <label asp-for="Genero">Género</label>
+                    @Html.DropDownListFor(x => x.Genero, new SelectList(Enum.GetValues(typeof(Genre))), "Especifique el genero...", new { @class = "form-control" })
+                </div>
+                <div class="form-group">
+                    <label asp-for="Cedula">Cédula</label>
+                    <input class="form-control" type="text" asp-for="Cedula">
+                </div>
+                <div class="form-group">
+                    <label asp-for="Nacimiento">Fecha de Nacimiento</label>
+                    <input class="form-control" type="date" asp-for="Nacimiento">
+                </div>
+                <div class="form-group">
+                    <label asp-for="Cargo">Cargo</label>
+                    <input class="form-control" type="text" asp-for="Cargo">
+                </div>
+                <div class="form-group">
+                    <label asp-for="Supervisor">Supervisor Inmediato</label>
+                    <input class="form-control" type="text" asp-for="Supervisor">
+                </div>
+                <div class="form-group">
+                    <label asp-for="DepartmentId">Departamento</label>
+                    @Html.DropDownListFor(x => x.DepartmentId, (IEnumerable<SelectListItem>)ViewBag.Departamentos, "Seleccione un departamento.", new { @class = "form-control" })
+                </div>
+                <div class="form-group">
+                    <button class="btn btn-primary">Enviar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
